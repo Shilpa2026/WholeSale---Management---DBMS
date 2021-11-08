@@ -136,7 +136,12 @@ begin
 end //
 delimiter;
 """
+
+
+def  headd():
+	print("\n\n\t\t\t\t\tWHOLESALE MANAGEMENT SYSTEM\n\n")
 def new_user():
+	headd()
 	username = input("Username : ")
 	passwrd = input("Password [Max length 8]: ")
 	desig = input("Admin/Customer : ")
@@ -145,6 +150,7 @@ def new_user():
 	co.execute(sql,val)
 	conn.commit()
 def admin_log():
+	headd()
 	username = input("Username : ")
 	passwrd = input("Password [Max length 8]: ")
 	desig = "ADMIN"
@@ -158,6 +164,7 @@ def admin_log():
 		raise Exception("Wrong Password!")
 
 def cust_log():
+	headd()
 	username = input("Username : ")
 	passwrd = input("Password [Max length 8]: ")
 	desig = "CUSTOMER"
@@ -171,6 +178,7 @@ def cust_log():
 		raise Exception("Wrong Password!")	
 
 def showman():
+	print("\nMANUFACTURER DETAILS\n\n")
 	sql = "select * from manufacturer;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -183,6 +191,7 @@ def showman():
 			print(str(y).ljust(20), end='')
 		print()
 def showdp():
+	print("\nDELIVERY PARTNER DETAILS\n\n")
 	sql = "select * from Delivery_partner;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -195,6 +204,7 @@ def showdp():
 			print(str(y).ljust(20), end='')
 		print()
 def showcat(): 
+	print("\nCATEGORY DETAILS\n\n")
 	sql = "select * from category;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -207,7 +217,7 @@ def showcat():
 			print(str(y).ljust(20), end='')
 		print()
 def showcust():
-
+	print("\nCUSTOMER DETAILS\n\n")
 	sql = "select cid,cname,cphone,cmail,building_no,street_no,street_name, city,district,state,country,pin  FROM customer inner join address on customer.cid = address.id;"
 	
 	co.execute(sql)
@@ -222,6 +232,7 @@ def showcust():
 		print()
 		
 def showprod(): 
+	print("\nPRODUCT DETAILS\n\n")
 	sql = "select * from products;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -234,6 +245,7 @@ def showprod():
 			print(str(y).ljust(20), end='')
 		print() 
 def showord(): 
+	print("\nORDER DETAILS\n\n")
 	sql = "select * from orders;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -246,6 +258,7 @@ def showord():
 			print(str(y).ljust(20), end='')
 		print()
 def showpay():
+	print("\nPAYMENT DETAILS\n\n")
 	sql = "select * from payment;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -260,6 +273,7 @@ def showpay():
 
 
 def showship():
+	print("\nSHIPPING DETAILS\n\n")
 	sql = "select * from shipping;"
 	co.execute(sql)
 	x = co.fetchall()
@@ -273,6 +287,7 @@ def showship():
 		print()
 		
 def ad_menu():
+	headd()
 	print('\t\t\t\t\tMENU')
 	print("1.Add Manufacturer details ")
 	print("2.Add Delivery Partner Details")
@@ -557,6 +572,7 @@ def up_oddate():
 	
 
 def disp_menu():
+	headd()
 	print('\t\t\t\t\tMENU')
 	print("1.Display Order Details using order id")
 	print("2.Display All orders by a customer ")
@@ -649,6 +665,7 @@ def disp_depl():
 	try:
 		co.execute(sql)
 		x = co.fetchall()
+		print("DEPLETED PRODUCTS \n\n")
 		head = ("PRODUCT-ID","NAME","SIZE","USP","MANUF.ID","MANUFACTURER-NAME","CATEGORY-ID")
 		print()
 		for y in head :
@@ -667,6 +684,7 @@ def disp_pay_def():
 	try:
 		co.execute(sql)
 		x = co.fetchall()
+		print("PAYMENT DEFAULTERS \n\n")
 		head = ("CUSTOMER-ID","NAME","ORDER-ID")
 		print()
 		for y in head :
@@ -680,10 +698,11 @@ def disp_pay_def():
 		print(e) 
 		
 def disp_notshipped():
-	sql = "select * from orders where oid not in (select oid from shipping);"
+	sql = "select * from orders where oid not in (select oid from shipping) and oid in (select oid from payment);"
 	try:
 		co.execute(sql)
 		x = co.fetchall()
+		print("NOT SHIPPED ORDERS \n\n")
 		head = ("OID","ODATE","CID","PID","PNAME","DISCOUNT","SIZE","UNIT_PRICE","QUANTITY")
 		print()
 		for y in head :
@@ -698,6 +717,7 @@ def disp_notshipped():
 			
 
 def del_menu():
+	headd()
 	print('\t\t\t\t\tMENU')
 	print("1.Delete Brand")
 	print("2.Delete Product")
@@ -757,8 +777,8 @@ def del_depp():
 		
 def admin_menu ():
 	a = 'y'
+	headd()
 	while (a == 'y' or a == 'Y'):
-        
 		print('\t\t\t\t\tMENU')
 		print("1.Add Details")
 		print("2.Update Details")
@@ -859,6 +879,7 @@ def admin_menu ():
 			
 			
 def c_ad_menu():
+	head()
 	print('\t\t\t\t\tMENU')
 	print("1.Add Customer Details ")
 	print("2.Add Order Details ")
@@ -866,6 +887,7 @@ def c_ad_menu():
 	
 
 def c_up_menu():
+	headd()
 	print('\t\t\t\t\tMENU')
 	print("1.Update Customer Phone Number ")
 	print("2.Update Customer Email ")
@@ -873,6 +895,7 @@ def c_up_menu():
 
 
 def c_disp_menu():
+	headd()
 	print('\t\t\t\t\tMENU')
 	print("1.Dispaly Customer information")
 	print("2.Display All orders by a customer id ")
@@ -1055,8 +1078,9 @@ def c_up_paymode():
 				
 def cust_menu():
 	a = 'y'
+	headd()
 	while (a == 'y' or a == 'Y'):
-        
+
 		print('\t\t\t\t\tMENU')
 		print("1.Add Details")
 		print("2.Update Details")
@@ -1146,6 +1170,7 @@ def cust_menu():
 			return
 
 def menu():
+	headd()
 	print('\t\t\t\t\tLOGIN OPTIONS:')
 	print("1.ADMIN LOGIN:")
 	print("2.CUSTOMER LOGIN:")
@@ -1153,6 +1178,7 @@ def menu():
 	print("4.EXIT")
 
 def main():
+	
     a = 'y'
     while (a == 'y' or a == 'Y'):
         menu()
@@ -1188,4 +1214,3 @@ if __name__ == "__main__":
     main()
 
 	
-
